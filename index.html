@@ -64,7 +64,21 @@
       <section class="download-group client-group" aria-labelledby="client-download-title">
         <div class="group-heading"><span class="group-index">01 <i>/ 02</i></span><h3 id="client-download-title"><a class="kinetic-title" href="#client-guide">Netflared<span class="word-arrow" aria-hidden="true">↘</span></a><br><span>(Client)</span></h3><p>Install on the Minecraft instance you play from.</p></div>
         <div class="download-grid">
-          <article class="download-card" data-side="client"><div class="card-top"><span class="side-tag">CLIENT</span><span class="card-arrow">↗</span></div><div class="loader-icon loader-neo">N</div><h3>Netflared Neo</h3><p class="loader-name">NeoForge · Client</p><p class="card-desc">Netflared client build for NeoForge.</p><div class="card-bottom"><span class="release-status"><i></i><span class="version-label">Latest release</span></span><a class="download-link" href="https://github.com/matejpcs/netflared-neo/releases/latest" target="_blank" rel="noreferrer">Download <span>↗</span></a></div></article>
+          <article class="download-card" id="neo-client-download" data-side="client">
+            <div class="card-top"><span class="side-tag">CLIENT</span><span class="card-arrow">↗</span></div>
+            <div class="loader-icon loader-neo">N</div>
+            <h3>Netflared Neo</h3>
+            <p class="loader-name">NeoForge · Client</p>
+            <p class="card-desc">Choose a Minecraft version to download its NeoForge client JAR.</p>
+            <div class="neo-version-picker" hidden>
+              <label for="neo-minecraft-version">Minecraft version</label>
+              <select id="neo-minecraft-version" aria-label="Minecraft version for Netflared Neo"></select>
+            </div>
+            <div class="card-bottom">
+              <span class="release-status"><i></i><span class="version-label">Loading versions…</span></span>
+              <a class="download-link" href="https://github.com/matejpcs/netflared-neo/releases/latest" target="_blank" rel="noreferrer">Download <span>↗</span></a>
+            </div>
+          </article>
           <article class="download-card" data-side="client"><div class="card-top"><span class="side-tag">CLIENT</span><span class="card-arrow">↗</span></div><div class="loader-icon loader-fabric">F</div><h3>Netflared Fabric</h3><p class="loader-name">Fabric · Client</p><p class="card-desc">Netflared client build for Fabric.</p><div class="card-bottom"><span class="release-status"><i></i><span class="version-label">Latest release</span></span><a class="download-link" href="https://github.com/matejpcs/netflared/releases/latest" target="_blank" rel="noreferrer">Download <span>↗</span></a></div></article>
           <article class="download-card" data-side="client"><div class="card-top"><span class="side-tag">CLIENT</span><span class="card-arrow">↗</span></div><div class="loader-icon loader-forge">A</div><h3>Netflared Forge</h3><p class="loader-name">Forge · Client</p><p class="card-desc">Netflared client build for Forge.</p><div class="card-bottom"><span class="release-status"><i></i><span class="version-label">Latest release</span></span><a class="download-link" href="https://github.com/matejpcs/netflared-forge/releases/latest" target="_blank" rel="noreferrer">Download <span>↗</span></a></div></article>
         </div>
@@ -98,7 +112,7 @@
           </article>
         </div>
       </section>
-      <p class="download-note"><span>ⓘ</span> Download links activate only when a Minecraft 26.2 JAR is available.</p>
+      <p class="download-note"><span>ⓘ</span> Choose a version for Netflared Neo. Other loader cards link to their Minecraft 26.2 build when available.</p>
     </section>
 
     <section class="guides-section" id="setup">

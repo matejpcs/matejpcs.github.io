@@ -46,9 +46,9 @@ function enableNeoVersionPicker(card) {
     ['1.21', document.createElement('optgroup')],
     ['26', document.createElement('optgroup')]
   ]);
-  groups.get('1.20').label = 'Minecraft 1.20 line';
-  groups.get('1.21').label = 'Minecraft 1.21 line';
-  groups.get('26').label = 'Minecraft 26 line';
+  groups.get('1.20').label = 'Minecraft 1.20';
+  groups.get('1.21').label = 'Minecraft 1.21';
+  groups.get('26').label = 'Minecraft 26';
 
   [...versions.keys()].sort(compareVersions).forEach((version) => {
     const option = document.createElement('option');

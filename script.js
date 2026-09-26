@@ -2,6 +2,20 @@ const cards = document.querySelectorAll('.download-card');
 const githubApi = 'https://api.github.com/repos/matejpcs';
 const targetVersion = /(?:^|[^0-9])26\.2(?:[^0-9]|$)/i;
 const neoJarName = /^netflared-neo-(1\.(?:20|21)(?:\.\d+)?|26\.\d+(?:\.\d+)?)\.jar$/i;
+const neoReleaseGroups = [
+  {
+    tag: 'v1.3.9-neo-1.20',
+    versions: ['1.20', '1.20.1', '1.20.2', '1.20.3', '1.20.4', '1.20.5', '1.20.6']
+  },
+  {
+    tag: 'v1.3.9-neo-1.21',
+    versions: ['1.21', '1.21.1', '1.21.2', '1.21.3', '1.21.4', '1.21.5', '1.21.6', '1.21.7', '1.21.8', '1.21.9', '1.21.10', '1.21.11']
+  },
+  {
+    tag: 'v1.3.9-neo-26',
+    versions: ['26.1', '26.1.1', '26.1.2', '26.2']
+  }
+];
 
 document.querySelector('#year').textContent = new Date().getFullYear();
 
@@ -57,9 +71,8 @@ function enableNeoVersionPicker(card, releases) {
     });
 
   if (!versions.size) {
-    disableCard(card, 'No supported NeoForge builds');
     picker.hidden = true;
-    return;
+    return false;
   }
 
   const groups = new Map([
@@ -108,6 +121,19 @@ function enableNeoVersionPicker(card, releases) {
 
   select.addEventListener('change', updateDownload);
   updateDownload();
+  return true;
+}
+
+function fallbackNeoReleases() {
+  return neoReleaseGroups.map(({ tag, versions }) => ({
+    tag_name: tag,
+    draft: false,
+    prerelease: false,
+    assets: versions.map((version) => ({
+      name: `netflared-neo-${version}.jar`,
+      browser_download_url: `https://github.com/matejpcs/netflared-neo/releases/download/${tag}/netflared-neo-${version}.jar`
+    }))
+  }));
 }
 
 cards.forEach(async (card) => {
@@ -125,7 +151,9 @@ cards.forEach(async (card) => {
     if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
     const releases = await response.json();
     if (repo === 'netflared-neo') {
-      enableNeoVersionPicker(card, releases);
+      if (!enableNeoVersionPicker(card, releases)) {
+        enableNeoVersionPicker(card, fallbackNeoReleases());
+      }
       return;
     }
 
@@ -147,6 +175,10 @@ cards.forEach(async (card) => {
     }
     enableCard(card, match.release, match.asset);
   } catch {
-    disableCard(card, 'Release check unavailable');
+    if (repo === 'netflared-neo') {
+      enableNeoVersionPicker(card, fallbackNeoReleases());
+    } else {
+      disableCard(card, 'Release check unavailable');
+    }
   }
 });
